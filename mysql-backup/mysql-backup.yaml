@@ -1,0 +1,39 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mysql-backup
+  namespace: mysql
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:  
+          containers:
+            - name: mysql-backup
+              image: docker.io/ashafqat/mysql-backup:v1.13
+              imagePullPolicy: IfNotPresent  
+              command:
+              - /bin/sh
+              args:
+              - -c
+              - /root/backup.sh
+              env:
+                - name: GOOGLE_PROJECT
+                  value: fiverr
+                - name: GOOGLE_EMAIL
+                  value: info@zaynsolutions.com
+                - name: DB_HOST
+                  value: mysql-service
+                - name: DB_USER
+                  value: root
+                - name: DB_PASS
+                  valueFrom:
+                    secretKeyRef:
+                      name: mysql-secret
+                      key: root-password
+                - name: DB_NAME
+                  value: book-management-db
+                - name: GS_BUCKET
+                  value: gs://mysql-backup-fiverr
+          restartPolicy: OnFailure
