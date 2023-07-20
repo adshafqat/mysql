@@ -1,7 +1,7 @@
 FROM google/cloud-sdk:alpine
 ENV GOOGLE_PROJECT fiverr
 
-ENV GOOGLE_CLIENT_EMAIL info@zaynsolutions.com
+ENV GOOGLE_CLIENT_EMAIL info@blabla.com
 ENV GS_BUCKET gs://mysql-backup-fiverr
 
 ENV DB_USER \
