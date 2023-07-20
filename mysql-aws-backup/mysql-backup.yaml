@@ -26,10 +26,7 @@ spec:
                 - name: DB_USER
                   value: root
                 - name: DB_PASS
-                  valueFrom:
-                    secretKeyRef:
-                      name: mysql-secret
-                      key: root-password
+                  value: winterblabla
                 - name: S3_BUCKET
                   value: s3://bucketname
                 - name: AWS_ACCESS_KEY_ID
